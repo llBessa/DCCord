@@ -5,11 +5,19 @@ import { HiLightningBolt, HiBell, HiTag, HiSearch } from "react-icons/hi";
 export default function Navigation() {
   const navBackground = useColorModeValue("gray.300", "gray.700")
   return (
-    <VStack p={2} justifyContent={"space-between"} alignItems="center" w="full" bg={navBackground}>
+    <VStack
+      p={2}
+      justifyContent={"space-between"}
+      alignItems="center"
+      alignSelf={"flex-start"}
+      w="fit-content"
+      h={"100%"}
+      bg={navBackground}>
       <VStack gap={6}>
         <Image
           src="/images/dcc-chat-logo.png"
           alt="logo"
+          w={"40px"}
           objectFit="contain"
           />
         <VStack>

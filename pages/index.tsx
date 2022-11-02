@@ -5,38 +5,33 @@ import {
   FormLabel,
   Heading,
   Input,
+  Image,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useForm } from "react-hook-form"
 
 export default function Home() {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue("gray.300", "gray.700")
-  let inputEmail = useRef()
-  let inputSenha = useRef()
+  const { register, handleSubmit } = useForm();
 
-  function login(){
-    console.table([{email: inputEmail.current.value, senha: inputSenha.current.value}])
-  }
-
-  function resetForm(){
-    inputEmail.current.value = ""
-    inputSenha.current.value = ""
+  function handleSignIn(data) {
+    console.log(data)
   }
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
-        <Flex direction="column" bg={formBackground} w={"30%"} p={12} rounded={6}>
-          <Heading mb={6}>Log-in</Heading>
+      <form onSubmit={handleSubmit(handleSignIn)}>
+        <Flex direction="column" alignItems="center" gap={3} bg={formBackground} p={12} rounded={6}>
+          <Image src="./images/dcc-chat-logo.svg" w="100px" alt="logo dccord"/>
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <Input
               placeholder="Digite seu email"
               variant="filled"
-              mb={3}
+              {...register("email")}
               type="email"
-              ref={inputEmail}
             />
           </FormControl>
           <FormControl isRequired>
@@ -44,14 +39,14 @@ export default function Home() {
             <Input
               placeholder="Digite sua senha"
               variant="filled"
-              mb={3}
+              {...register("senha")}
               type="password"
-              ref={inputSenha}
             />
           </FormControl>
-          <Button colorScheme="teal" mb={3} onClick={() => {login(); resetForm();}}>Log-in</Button>
-          <Button onClick={toggleColorMode}>Change Color</Button>
+          <Button type="submit" colorScheme="teal" w="full">Log-in</Button>
+          <Button onClick={toggleColorMode} w="full">Change Color</Button>
         </Flex>
-      </Flex>
+      </form>
+    </Flex>
   );
 }

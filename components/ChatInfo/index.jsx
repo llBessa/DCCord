@@ -20,7 +20,7 @@ export default function ChatInfo(){
     ]
 
     return(
-        <VStack justifyContent={"space-around"} gap={4}>
+        <VStack gap={4} h={"100%"} w="25%">
             <Flex w={"100%"} justifyContent={"space-between"}>
                 <Text>12 October 2022</Text>
                 <BellIcon/>

@@ -11,12 +11,12 @@ export default function FriendsOnline(){
     ]
 
     return(
-        <VStack marginTop={"50px"}>
-            <HStack w={"100%"} justifyContent={"space-between"}>
+        <VStack w={"100%"}>
+            <HStack justifyContent={"space-between"} w="100%">
                 <Heading size={"xs"}>Friends Online</Heading>
                 <Text fontSize={"sm"}>23</Text>
             </HStack>
-            <HStack>
+            <HStack justifyContent={"space-between"} w="100%">
                 {onlineFriends.map((friend , index) => (
                     <Friend key={index} nome={friend.nome} foto={friend.foto} />
                 ))}

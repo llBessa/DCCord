@@ -1,4 +1,4 @@
-import { Box, Heading, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import ChatCard from "./ChatCard";
 import Search from "./Search";
 
@@ -12,14 +12,18 @@ export default function ChatHistory(){
     ]
 
     return(
-        <VStack spacing={8}>
-            <Box>
+        <VStack w="100%">
+            <Box w={"inherit"}>
                 <Heading size={"md"} mb={4}>Chats</Heading>
                 <Search placeholder={"Search friends"} />
             </Box>
-            {friends.map((friend, index) => (
-                <ChatCard key={index} nome={friend.nome} foto={friend.foto} />
-            ))}
+            <Box w="inherit" overflowX={"hidden"}>
+                <Flex w="100%" paddingRight={"30px"} boxSizing="content-box" direction={"column"} overflowY="scroll" gap={4} >
+                    {friends.map((friend, index) => (
+                        <ChatCard key={index} nome={friend.nome} foto={friend.foto} />
+                    ))}
+                </Flex>
+            </Box>
         </VStack>
     )
 }

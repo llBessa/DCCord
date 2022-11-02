@@ -6,10 +6,10 @@ import Message from "./Message";
 
 export default function Chat({user}){
     return(
-        <VStack justifyContent={"space-around"} w={"80%"}>
+        <VStack justifyContent={"space-around"} h="100%" >
             <Search placeholder={"Search friends"} />
-            <Box w={"100%"} h={"80%"}>
-                <VStack alignItems={"flex-start"}>
+            <Box w={"100%"} h={"70%"}>
+                <VStack alignItems={"flex-start"} spacing={0}>
                     <Text fontSize={"sm"}>Chat with</Text>
                     <Text fontSize={"2xl"} fontWeight={"bold"}>Acauan Ribeiro</Text>
                 </VStack>
