@@ -7,11 +7,12 @@ type RespostaAPI = {
 
 export async function middleware(req: NextRequest) {
     const authHeader = req.headers.get("Authorization")
+
     // verifica se existe um token nos headers
     if (!authHeader) {
-        return NextResponse.next({
+        return new NextResponse(undefined, {
             status: 401,
-            statusText: "error : No token provided"
+            statusText: "error : no token provided"
         })
     }
 
@@ -19,7 +20,7 @@ export async function middleware(req: NextRequest) {
 
     // verifica se o token possui duas partes
     if (!(tokenParts.length === 2)) {
-        return NextResponse.next({
+        return new NextResponse(undefined, {
             status: 401,
             statusText: "error : Token error"
         })
@@ -29,7 +30,7 @@ export async function middleware(req: NextRequest) {
 
     // verifica a existencia do "Bearer" no token
     if (!/Bearer/i.test(scheme)) {
-        return NextResponse.next({
+        return new NextResponse(undefined, {
             status: 401,
             statusText: "error : Token malformatted"
         })
@@ -40,29 +41,24 @@ export async function middleware(req: NextRequest) {
     // logo, a validação com JWT deve ser feita na rota de API
     const response = await fetch(`http://${req.headers.get("host")}/api/auth/verify`, {
         method: "POST",
-        body: JSON.stringify({token: token }),
-        headers: { "Content-Type": "json/application"}
+        body: JSON.stringify({ token: token }),
+        headers: { "Content-Type": "application/json" }
     })
-    
-    const dadosAPI : RespostaAPI = await response.json()
+
+    const dadosAPI: RespostaAPI = await response.json()
 
     // caso o token seja validado, o id de usuario é retornado na requisição
-    if (dadosAPI?.status == "success"){
-        const response = NextResponse.next({
-            status: 200,
-            statusText: "success",
-        })
-        response.cookies.set("userId", dadosAPI.id)
-        return response
+    if (dadosAPI?.status == "success") {
+        return NextResponse.next()
     }
 
     // resposta caso o token seja inválido
-    return NextResponse.next({
+    return new NextResponse(undefined, {
         status: 401,
         statusText: "error: Invalid token"
     })
 }
 
 export const config = {
-    matcher: ["/:path*", "/api/auth/test:path*"]
+    matcher: ["/api/users/:path*"]
 }
