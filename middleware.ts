@@ -45,7 +45,7 @@ export async function middleware(req: NextRequest) {
         headers: { "Content-Type": "application/json" }
     })
 
-    const dadosAPI: RespostaAPI = await response.json()
+    const dadosAPI = await response.json() as RespostaAPI
 
     // caso o token seja validado, o id de usuario é retornado na requisição
     if (dadosAPI?.status == "success") {
@@ -60,5 +60,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/api/users/:path*"]
+    matcher: ["/api/users/get:path*"]
 }

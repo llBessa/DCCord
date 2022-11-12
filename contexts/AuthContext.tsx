@@ -31,7 +31,7 @@ type apiUserData = {
 }
 
 type User = {
-    nome: string;
+    name: string;
     email: string;
     github?: string;
 }
@@ -48,10 +48,10 @@ export function AuthProvider({ children }: any) {
     useEffect(() => {
         const { "DCCord-token": token } = parseCookies()
 
-        if(token){
+        if(token && !isAuthenticated){
             const verify = async () : Promise<any> => {
                 // verifica a validade do token
-                const response = await api.get("/api/auth/verify", {
+                const response = await fetch("/api/auth/verify", {
                     method: "POST",
                     body: JSON.stringify({token: token}),
                     headers: {"Content-Type": "application/json"}

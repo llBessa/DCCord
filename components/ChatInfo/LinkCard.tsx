@@ -1,8 +1,14 @@
 import { LinkIcon } from "@chakra-ui/icons";
 import { HStack, Text, VStack } from "@chakra-ui/react";
 
-export default function LinkCard({src, date, time}){
-    return(
+interface LinkCardProps {
+    src: string;
+    date: string;
+    time: string;
+}
+
+export default function LinkCard({ src, date, time }: LinkCardProps) {
+    return (
         <HStack h={"20%"} w={"100%"}>
             <LinkIcon />
             <VStack w={"100%"} p={2}>

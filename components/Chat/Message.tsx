@@ -1,6 +1,12 @@
 import { Text, VStack } from "@chakra-ui/react";
 
-export default function Message({text, time, isSender}){
+interface MessageProps {
+    text: string;
+    time: string;
+    isSender: string;
+}
+
+export default function Message({text, time, isSender}: MessageProps){
     const alignItem = isSender? "flex-end" : "flex-start";
     const bgMessage = isSender? "blue.500" : "gray.500"
     return(

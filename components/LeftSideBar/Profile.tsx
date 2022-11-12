@@ -1,7 +1,12 @@
 import { Avatar, AvatarBadge, Flex, Heading, HStack, IconButton, VStack } from "@chakra-ui/react";
 import { RiInstagramFill, RiTwitterFill, RiGithubFill } from "react-icons/ri"
 
-export default function Profile({ name, srcProfile }) {
+interface ProfileProps {
+  name: string;
+  srcProfile?: string;
+}
+
+export default function Profile({ name, srcProfile }: ProfileProps) {
   return (
     <VStack w={"100%"}>
       <Avatar name={name} src={srcProfile} size={"xl"}>
@@ -11,16 +16,16 @@ export default function Profile({ name, srcProfile }) {
         {name}
       </Heading>
       <HStack>
-      <IconButton
+        <IconButton
           color="gray.500"
-          icon={<RiGithubFill size={25}/>}
+          icon={<RiGithubFill size={25} />}
           aria-label="Actions"
           variant="ghost"
           rounded="full"
         />
         <IconButton
           color="gray.500"
-          icon={<RiInstagramFill size={25}/>}
+          icon={<RiInstagramFill size={25} />}
           aria-label="Actions"
           variant="ghost"
           rounded="full"
@@ -28,7 +33,7 @@ export default function Profile({ name, srcProfile }) {
         <IconButton
           color="gray.500"
           rounded="full"
-          icon={<RiTwitterFill size={25}/>}
+          icon={<RiTwitterFill size={25} />}
           aria-label="Actions"
           variant="ghost"
         />

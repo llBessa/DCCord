@@ -3,20 +3,26 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Image,
   useColorMode,
   useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
+import NextLink from "next/link"
 import { useForm } from "react-hook-form"
 import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
+  // hooks de tratamento de esquema de cores
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue("gray.300", "gray.700")
+
+  // hook de formulario
   const { register, handleSubmit } = useForm();
+
+  // contexto de login
   const { signIn } = useContext(AuthContext)
 
   // realiza o login na pagina
@@ -48,6 +54,13 @@ export default function Home() {
             />
           </FormControl>
           <Button type="submit" colorScheme="teal" w="full">Log-in</Button>
+          <NextLink href={"/register"} passHref>
+            <Link textDecoration={"none"} w="full">
+              <Button textDecoration={"inherit"} colorScheme={"purple"} w="full">
+                Registrar-se
+              </Button>
+            </Link>
+          </NextLink>
           <Button onClick={toggleColorMode} w="full">Change Color</Button>
         </Flex>
       </form>

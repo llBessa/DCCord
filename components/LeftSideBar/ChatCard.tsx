@@ -1,6 +1,11 @@
 import { Avatar, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 
-export default function ChatCard({foto, nome}){
+interface ChatCardProps {
+    foto: string;
+    nome: string;
+}
+
+export default function ChatCard({foto, nome} : ChatCardProps){
     return(
         <HStack w={"inherit"}>
             <Avatar name={nome} src={foto} />

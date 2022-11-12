@@ -1,9 +1,16 @@
 import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 
-export default function FileCard({fileSize, fileName, srcImage, dateTime}){
-    return(
+interface FileCardProps {
+    fileSize: string;
+    fileName: string;
+    srcImage: string;
+    dateTime: string;
+}
+
+export default function FileCard({ fileSize, fileName, srcImage, dateTime }: FileCardProps) {
+    return (
         <HStack h={"20%"} w={"inherit"}>
-            <Image src={srcImage} alt={fileName} w="10%"/>
+            <Image src={srcImage} alt={fileName} w="10%" />
             <VStack w={"80%"}>
                 <Text fontWeight={"bold"}>{fileName}</Text>
                 <HStack justifyContent={"space-between"}>
