@@ -7,7 +7,7 @@ interface ChatCardProps {
 
 export default function ChatCard({foto, nome} : ChatCardProps){
     return(
-        <HStack w={"inherit"}>
+        <HStack>
             <Avatar name={nome} src={foto} />
             <Flex direction={"column"} w="80%">
                 <Flex justifyContent={"space-between"}>

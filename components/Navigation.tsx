@@ -1,27 +1,60 @@
-import { VStack, Image, Box, IconButton, Tooltip, useColorModeValue } from "@chakra-ui/react";
-import { MdDashboard, MdMail, MdSettings } from "react-icons/md";
+import { VStack, Image, Box, IconButton, Tooltip, useColorModeValue, LayoutProps, ChakraProvider, useColorMode } from "@chakra-ui/react";
+import { MdDashboard, MdLogout, MdMail, MdSettings } from "react-icons/md";
 import { HiLightningBolt, HiBell, HiTag, HiSearch } from "react-icons/hi";
+import { useRouter } from "next/router";
+import { destroyCookie } from "nookies";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-export default function Navigation() {
+export default function Navigation({ display }: LayoutProps) {
   const navBackground = useColorModeValue("gray.300", "gray.700")
+  const { toggleColorMode, colorMode } = useColorMode();
+  const router = useRouter()
+
+  function logout() {
+    destroyCookie(undefined, "DCCord-token", { priority: "high" })
+    router.push("/")
+  }
+
   return (
     <VStack
       p={2}
       justifyContent={"space-between"}
       alignItems="center"
-      alignSelf={"flex-start"}
       w="fit-content"
       h={"100%"}
-      bg={navBackground}>
+      bg={navBackground}
+      display={display}
+    >
       <VStack gap={6}>
         <Image
           src="/images/dcc-chat-logo.png"
           alt="logo"
           w={"40px"}
           objectFit="contain"
-          />
+        />
         <VStack>
-          {/* IconButtons with Tooltips */}
+        {colorMode == "light"
+        ?
+          <Tooltip label="light" placement="right">
+              <IconButton
+                color="yellow.500"
+                icon={<SunIcon />}
+                aria-label="light"
+                bg={"white"}
+                onClick={toggleColorMode}
+              />
+            </Tooltip>
+        :
+          <Tooltip label="Dark" placement="right">
+            <IconButton
+              color="white"
+              icon={<MoonIcon />}
+              aria-label="Dark"
+              bg={"blue.800"}
+              onClick={toggleColorMode}
+            />
+          </Tooltip>
+      }
           <Tooltip label="Dashboard" placement="right">
             <IconButton
               color="gray.500"
@@ -60,10 +93,13 @@ export default function Navigation() {
               aria-label="Messages"
             />
           </Tooltip>
+          <Tooltip label="Settings" placement="right">
+            <IconButton icon={<MdSettings />} color="gray.500" aria-label="Settings" />
+          </Tooltip>
         </VStack>
       </VStack>
-      <Tooltip label="Settigns" placement="right">
-        <IconButton icon={<MdSettings />} aria-label="Settigns" />
+      <Tooltip label="Log-out" placement="right">
+        <IconButton icon={<MdLogout />} color="gray.500" aria-label="Log-out" onClick={() => logout()} />
       </Tooltip>
     </VStack>
   );

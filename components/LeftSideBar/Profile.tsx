@@ -8,9 +8,9 @@ interface ProfileProps {
 
 export default function Profile({ name, srcProfile }: ProfileProps) {
   return (
-    <VStack w={"100%"}>
+    <VStack w={"100%"} h={"fit-content"}>
       <Avatar name={name} src={srcProfile} size={"xl"}>
-        <AvatarBadge boxSize={4} bg="green.500" />
+        <AvatarBadge boxSize={"40%"} bg="green.500" />
       </Avatar>
       <Heading as="h4" size="md">
         {name}

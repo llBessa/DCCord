@@ -1,5 +1,5 @@
 import { LinkIcon } from "@chakra-ui/icons";
-import { HStack, Text, VStack } from "@chakra-ui/react";
+import { HStack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 
 interface LinkCardProps {
     src: string;
@@ -8,15 +8,17 @@ interface LinkCardProps {
 }
 
 export default function LinkCard({ src, date, time }: LinkCardProps) {
+    const textColor = useColorModeValue("black", "gray.300")
+
     return (
-        <HStack h={"20%"} w={"100%"}>
+        <HStack>
             <LinkIcon />
             <VStack w={"100%"} p={2}>
                 <HStack w={"100%"} justifyContent={"space-between"}>
                     <Text fontWeight={"bold"}>{src}</Text>
-                    <Text fontSize={"sm"} color={"gray.300"}>{time}</Text>
+                    <Text fontSize={"sm"} color={textColor}>{time}</Text>
                 </HStack>
-                <Text alignSelf={"flex-start"} fontSize={"sm"} color={"gray.300"}>{date}</Text>
+                <Text alignSelf={"flex-start"} fontSize={"sm"} color={textColor}>{date}</Text>
             </VStack>
         </HStack>
     )

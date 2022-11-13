@@ -8,7 +8,7 @@ interface FriendProps {
 export default function Friend({nome, foto} : FriendProps) {
     return (
         <Avatar name={nome} src={foto}>
-            <AvatarBadge boxSize={4} bg={"green.500"} />
+            <AvatarBadge boxSize={"40%"} bg={"green.500"} />
         </Avatar>
     )
 }

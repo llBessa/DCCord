@@ -11,8 +11,24 @@ a {
   text-decoration: none !important;
 }
 
+/* classe para esconder a barra de scroll */
+/* Chrome, Safari e Opera */
+.scrollHidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollHidden {
+  /* IE e Edge */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  scrollbar-width: thin;
+}
+
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 @media (prefers-color-scheme: dark) {

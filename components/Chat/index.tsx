@@ -1,35 +1,35 @@
 import { useContext } from "react"
-import { Avatar, Box, ChakraProps, Flex, HStack, Icon, IconButton, Input, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, ChakraProps, Flex, HStack, Icon, IconButton, Image, Input, LayoutProps, Text, VStack } from "@chakra-ui/react";
 import { MdMoreVert } from "react-icons/md"
 import { RiSendPlaneFill } from "react-icons/ri"
 import { AuthContext } from "../../contexts/AuthContext";
 import Search from "../LeftSideBar/Search"
 import Message from "./Message";
 
-interface ChatProps {
-    width: string;
-    height: string;
-}
-
-export default function Chat({width, height}: ChatProps) {
+export default function Chat({ width, height }: LayoutProps) {
     const { user } = useContext(AuthContext)
-    
+
     return (
-        <VStack justifyContent={"space-around"} w={width} h={height} >
-            <Search placeholder={"Search friends"} />
-            <Box w={"100%"} h={"70%"}>
-                <VStack alignItems={"flex-start"} spacing={0}>
-                    <Text fontSize={"sm"}>Chat with</Text>
-                    <Text fontSize={"2xl"} fontWeight={"bold"}>Acauan Ribeiro</Text>
+        <VStack justifyContent={{ base: "flex-start", md: "space-between" }} w={width} h={height} gap={4}>
+            <Search placeholder={"Search friends"} display={{ base: "none", md: "block" }} />
+            <Image
+                src="/images/dcc-chat-logo.png"
+                alt="logo"
+                boxSize={"20%"}
+                objectFit="contain"
+                display={{ md: "none" }}
+            />
+            <Box w={"full"} h={{ base: "60%", md: "80%" }}>
+                <VStack alignItems={"flex-start"} spacing={0} mb={3}>
+                    {/* <Text fontSize={"sm"}>Chat Geral</Text> */}
+                    <Text fontSize={"2xl"} fontWeight={"bold"}>Chat geral</Text>
                 </VStack>
-                <Box borderWidth={"1px"} rounded={"2%"} w="100%" h={"90%"} overflowX={"hidden"} p={6}>
-                    <Flex id="chat" direction={"column"} gap={4} w="100%" h={"100%"} overflowY={"scroll"} paddingRight="48px" boxSizing="content-box">
-                    </Flex>
-                </Box>
+                <Flex borderWidth={"1px"} rounded={"2%"} w="full" h={"90%"} p={6} className="scrollHidden" id="chat" direction={"column"} gap={4} overflowY={"scroll"}>
+                </Flex>
             </Box>
-            <HStack gap={2} w={"100%"}>
-                <Avatar name={user?.name} src={(user && user.github)? `${user.github}.png` : undefined} />
-                <Input type={"text"} placeholder="Type your message" />
+            <HStack w={"full"}>
+                <Avatar display={{ base: "none", md: "block" }} name={user?.name} src={(user && user.github) ? `${user.github}.png` : undefined} />
+                <Input type={"text"} placeholder="Digite uma mensaem" />
                 <IconButton aria-label="25">
                     <MdMoreVert size={25} />
                 </IconButton>

@@ -1,4 +1,4 @@
-import { HStack, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import LinkCard from "./LinkCard";
 
 interface SharedLinksProps {
@@ -7,16 +7,19 @@ interface SharedLinksProps {
 
 export default function SharedLinks({ links }: SharedLinksProps) {
     return (
-        <VStack w="80%">
-            <HStack w={"100%"} mb={2} justifyContent={"space-between"}>
+        <VStack h={"30%"} w="full" justifyContent={"center"} alignItems={"center"} overflowY="hidden">
+            <HStack w={"full"} mb={2} justifyContent={"space-between"}>
                 <Text fontWeight={"bold"}>Shared Links</Text>
-                <Text>see all</Text>
+                <Text _hover={{ color: "cyan" }}>see all</Text>
             </HStack>
-            <VStack gap={6} h="80%" w="100%">
+            <Flex direction={"column"} w={"full"} overflowY="scroll" gap={2} padding={2} className="scrollHidden">
                 {links.map((link, index) => (
-                    <LinkCard key={index} {...link} />
+                    <>
+                        <LinkCard key={index} {...link} />
+                        <hr />
+                    </>
                 ))}
-            </VStack>
+            </Flex>
         </VStack>
     )
 }
