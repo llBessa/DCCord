@@ -33,9 +33,9 @@ export default function Register() {
             <Head>
                 <title>DCCord - Registro</title>
             </Head>
-            <Flex h={"100vh"} justifyContent="center" alignItems={"center"}>
+            <Flex h={"100vh"} my={10} justifyContent="center" alignItems={"center"}>
                 <form onSubmit={handleSubmit(handleRegister)}>
-                    <Flex direction="column" alignItems="center" gap={3} bg={formBackground} p={12} rounded={6}>
+                    <Flex direction="column" alignItems="center" gap={3} bg={formBackground} my={10} px={10} py={5} rounded={6}>
                         <Image src="./images/dcc-chat-logo.svg" w="100px" alt="logo dccord" />
                         <FormControl isRequired>
                             <FormLabel>Nome</FormLabel>
@@ -72,7 +72,7 @@ export default function Register() {
                         <Button type="submit" colorScheme="purple" w="full">Registrar-se</Button>
                         <Button onClick={toggleColorMode} w="full">Mudar cor</Button>
                         <Text>Já possui uma conta?</Text>
-                        <Button type="submit" colorScheme="teal" w="full">
+                        <Button type="button" colorScheme="teal" w="full">
                             <NextLink href={"/"} passHref>
                                 <Link>
                                     Fazer log-in

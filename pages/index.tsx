@@ -8,6 +8,7 @@ import {
   useColorMode,
   useColorModeValue,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import NextLink from "next/link"
 import { useForm } from "react-hook-form"
@@ -22,6 +23,8 @@ export default function Home() {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue("gray.300", "gray.700")
 
+  const toast = useToast()
+
   // hook de formulario
   const { register, handleSubmit } = useForm();
 
@@ -30,7 +33,26 @@ export default function Home() {
 
   // realiza o login na pagina
   async function handleSignIn(data: any) {
-    await signIn(data)
+
+    const response = await signIn(data)
+
+    if (response.status == "error") {
+      toast({
+        title: "Login falhou",
+        description: response.status_msg,
+        duration: 3000,
+        status: "error"
+      })
+    }
+
+    if(response.status == "success") {
+      toast({
+        title: "Login realizado com sucesso",
+        description: response.status_msg,
+        duration: 3000,
+        status: "success"
+      })
+    }
   }
 
   return (

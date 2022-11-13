@@ -16,35 +16,44 @@ export default async function Authenticate(req: NextApiRequest, res: NextApiResp
     }
     const { email, password } = req.body
 
-    let data: any = await prisma.users.findFirst({
-        select: {
-            id: true,
-            nome: true,
-            email: true,
-            senha: true,
-            github: true
-            
-        },
-        where: {
-            email: email
+    try {
+        var data: any = await prisma.users.findFirst({
+            select: {
+                id: true,
+                nome: true,
+                email: true,
+                senha: true,
+                github: true
+
+            },
+            where: {
+                email: email
+            }
+        });
+
+        var user: User = {
+            nome: data.nome,
+            email: data.email,
+            github: data.github,
+            id: data.id.toString()
         }
-    });
 
-    let user: User = {
-        nome: data.nome,
-        email: data.email,
-        github: data.github,
-        id: data.id.toString()
+        // verifica se a senha esta correta
+        if (password != data.senha) return res.status(400).json({ status: "error", status_msg: "Senha invalida" })
+
+        return res.status(200).json({
+            status: "success",
+            status_msg: "Usuario verificado",
+            user,
+            token: generateToken({ id: user.id })
+        })
+
+    } catch (error) {
+        // verifica se o usuario existe
+        if (!data) return res.status(400).json({ status: "error", status_msg: "Usuario não encontrado" })
+
+        return res.status(500).json({ status: "error", status_msg: error })
     }
-
-    // verifica se o usuario existe
-    if (!user) return res.status(400).json({ status: "error", status_msg: "User not found" })
-
-    // verifica se a senha esta correta
-    if (password != data.senha) return res.status(400).json({ status: "error", status_msg: "Invalid password" })
-
-    return res.status(200).json({ user, token: generateToken({ id: user.id }) })
-
 }
 
 function generateToken(params = {}) {

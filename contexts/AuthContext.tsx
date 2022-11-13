@@ -6,7 +6,7 @@ import { getAPIClient } from "../lib/fetch";
 type AuthContextType = {
     isAuthenticated: boolean;
     user: User | null;
-    signIn: (data: SignInData) => Promise<void>;
+    signIn: (data: SignInData) => Promise<apiAuthData>;
 }
 
 type SignInData = {
@@ -15,6 +15,8 @@ type SignInData = {
 }
 
 type apiAuthData = {
+    status: string;
+    status_msg: string;
     token: string;
     user: User;
 }
@@ -48,25 +50,25 @@ export function AuthProvider({ children }: any) {
     useEffect(() => {
         const { "DCCord-token": token } = parseCookies()
 
-        if(token && !isAuthenticated){
-            const verify = async () : Promise<any> => {
+        if (token && !isAuthenticated) {
+            const verify = async (): Promise<any> => {
                 // verifica a validade do token
                 const response = await fetch("/api/auth/verify", {
                     method: "POST",
-                    body: JSON.stringify({token: token}),
-                    headers: {"Content-Type": "application/json"}
+                    body: JSON.stringify({ token: token }),
+                    headers: { "Content-Type": "application/json" }
                 })
 
                 let dataToken: apiVerifyTokenData = await response.json()
 
                 // atualiza os dados do usuario de acordo com o token provido
-                if(dataToken.status == "success"){
+                if (dataToken.status == "success") {
                     let id = dataToken.id
 
                     const response = await api.get(`/api/users/get/${id}`)
                     const dataUser: apiUserData = await response.json()
 
-                    if(dataUser.user) setUser(dataUser.user)
+                    if (dataUser.user) setUser(dataUser.user)
                 }
             }
 
@@ -82,15 +84,23 @@ export function AuthProvider({ children }: any) {
             headers: { "Content-Type": "application/json" }
         })
 
-        const { token, user }: apiAuthData = await response.json()
+        const apiJsonResponse: apiAuthData = await response.json()
 
-        setCookie(undefined, "DCCord-token", token, {
-            maxAge: 60 * 60 * 3  // 3 horas
-        })
+        if(response.status == 500) return {} as apiAuthData
 
-        setUser(user)
+        if (apiJsonResponse.user) {
+            setCookie(undefined, "DCCord-token", apiJsonResponse.token, {
+                maxAge: 60 * 60 * 3  // 3 horas
+            })
 
-        router.push("/chatpage")
+            setUser(user)
+
+            router.push("/chatpage")
+
+            return apiJsonResponse
+        }
+
+        return apiJsonResponse
     }
 
 
