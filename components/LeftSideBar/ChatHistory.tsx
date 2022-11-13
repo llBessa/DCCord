@@ -17,7 +17,7 @@ export default function ChatHistory() {
                 <Heading size={"md"} mb={4}>Chats</Heading>
                 <Search placeholder={"Search friends"} display={"block"} />
             </Box>
-            <Flex w="inherit" h={"fit-content"} direction={"column"} gap={2} overflowY={"scroll"} className="scrollHidden" padding={2}>
+            <Flex w="inherit" h={"fit-content"} direction={"column"} gap={2} overflowY={"auto"} className="customScroll" padding={2}>
                 {friends.map((friend, index) => (
                     <>
                         <ChatCard key={index} nome={friend.nome} foto={friend.foto} />

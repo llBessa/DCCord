@@ -24,8 +24,10 @@ export default function Chat({ width, height }: LayoutProps) {
                     {/* <Text fontSize={"sm"}>Chat Geral</Text> */}
                     <Text fontSize={"2xl"} fontWeight={"bold"}>Chat geral</Text>
                 </VStack>
-                <Flex borderWidth={"1px"} rounded={"2%"} w="full" h={"90%"} p={6} className="scrollHidden" id="chat" direction={"column"} gap={4} overflowY={"scroll"}>
-                </Flex>
+                <Box borderWidth={"1px"} rounded={"2%"} w="full" h={"90%"} boxSizing="content-box" paddingRight={"1px"}>
+                    <Flex mt={2} h={"97%"} className="customScroll" id="chat" direction={"column"} px={2} gap={4} overflowY={"auto"}>
+                    </Flex>
+                </Box>
             </Box>
             <HStack w={"full"}>
                 <Avatar display={{ base: "none", md: "block" }} name={user?.name} src={(user && user.github) ? `${user.github}.png` : undefined} />

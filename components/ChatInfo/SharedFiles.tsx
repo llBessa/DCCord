@@ -12,7 +12,7 @@ export default function SharedFiles({ files }: SharedFilesProps) {
                 <Text fontWeight={"bold"}>Shared Files</Text>
                 <Text _hover={{ color: "cyan" }}>see all</Text>
             </HStack>
-            <Flex direction={"column"} w={"full"} overflowY="scroll" gap={2} padding={2} className="scrollHidden">
+            <Flex direction={"column"} w={"full"} overflowY="auto" gap={2} padding={2} className="customScroll">
                 {files.map((file: any, index: any) => (
                     <>
                         <FileCard key={index} fileName={file.name} srcImage={file.image} fileSize={file.size} dateTime={file.dateTime} />

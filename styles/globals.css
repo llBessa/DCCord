@@ -11,13 +11,27 @@ a {
   text-decoration: none !important;
 }
 
-/* classe para esconder a barra de scroll */
+/* classe para customizar a barra de scroll */
 /* Chrome, Safari e Opera */
 .scrollHidden::-webkit-scrollbar {
   display: none;
 }
 
-.scrollHidden {
+.customScroll::-webkit-scrollbar {
+  width: 2px;
+}
+
+.customScroll::-webkit-scrollbar-track {
+  background: gray;
+  border-radius: 10%;
+}
+
+.customScroll::-webkit-scrollbar-thumb{
+  background: cyan;
+  border-radius: 20%;
+}
+
+.customScroll {
   /* IE e Edge */
   -ms-overflow-style: none;
 
@@ -35,6 +49,7 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;

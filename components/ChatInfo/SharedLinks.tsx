@@ -12,7 +12,7 @@ export default function SharedLinks({ links }: SharedLinksProps) {
                 <Text fontWeight={"bold"}>Shared Links</Text>
                 <Text _hover={{ color: "cyan" }}>see all</Text>
             </HStack>
-            <Flex direction={"column"} w={"full"} overflowY="scroll" gap={2} padding={2} className="scrollHidden">
+            <Flex direction={"column"} w={"full"} overflowY="auto" gap={2} padding={2} className="customScroll">
                 {links.map((link, index) => (
                     <>
                         <LinkCard key={index} {...link} />
