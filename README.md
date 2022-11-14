@@ -40,19 +40,15 @@
 #### .env
 
     // Caminho: /.env
-    // arquivo com informação do banco de dados
+    // arquivo com informação do banco de dados e a chave md5 utilizada na autenticação JWT
 
     DATABASE_URL="String-de-conexão-com-o-banco-de-dados-postgres"
+    SECRET="chave-md5"
 
-#### Auth.json
+### **3. Gerar Client do prisma**
 
-    // Caminho: /config/Auth.json
-    // arquivo que contém a chave md5 utilizada na autenticação JWT
+    npx prisma generate
 
-    {
-        secret: "chave-md5-gerada"
-    }
-
-### **3. Iniciar o servidor no modo de desenvolvimento**
+### **4. Iniciar o servidor no modo de desenvolvimento**
 
     npm run dev

@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken"
-import AuthConfig from "../../../config/Auth.json"
 
 export default function Verify(req: NextApiRequest, res: NextApiResponse) {
     const { token } = req.body
 
-    jwt.verify(token, AuthConfig.secret, (error: any, decoded: any) => {
+    const { env } = process
+    const secret = env.SECRET? env.SECRET : ""
+
+    jwt.verify(token, secret, (error: any, decoded: any) => {
         if(error) return res.json({status: "error"})
         
         return res.json({status: "success", id: decoded.id})

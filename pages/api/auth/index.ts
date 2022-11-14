@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma"
 import jwt from "jsonwebtoken"
-import authConfig from "../../../config/Auth.json"
 
 type User = {
     nome: string;
@@ -57,7 +56,10 @@ export default async function Authenticate(req: NextApiRequest, res: NextApiResp
 }
 
 function generateToken(params = {}) {
-    return jwt.sign(params, authConfig.secret, {
+    const { env } = process
+    const secret = env.SECRET? env.SECRET : ""
+
+    return jwt.sign(params, secret, {
         expiresIn: 60 * 60 * 24 // 1 dia
     })
 }
