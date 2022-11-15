@@ -75,7 +75,6 @@ export default function Chat({ width, height }: LayoutProps) {
                 ...messages,
                 {user: "DCCord", message: `${msg.user} entrou no chat!`}
             ])
-            console.log("passou aqui")
         })
 
         socket.on("newIncomingMessage", (msg: any) => {
