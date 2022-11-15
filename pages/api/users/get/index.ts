@@ -4,7 +4,7 @@ import prisma from "../../../../lib/prisma";
 export default async function Get(req: NextApiRequest, res: NextApiResponse){
     try {
         const users = await prisma.users.findMany({select: {
-            nome: true,
+            name: true,
             email: true,
             github: true
         }})

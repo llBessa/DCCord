@@ -4,11 +4,11 @@ import Search from "./Search";
 
 export default function ChatHistory() {
     const friends = [
-        { nome: "Acauan Ribeiro", foto: "https://github.com/acauanrr.png" },
-        { nome: "Cleuson", foto: "https://github.com/cleusonss.png" },
-        { nome: "Ozeias Sousa", foto: "https://github.com/osouzati.png" },
-        { nome: "Victor Roberto", foto: "https://github.com/mandaver.png" },
-        { nome: "Rafael Nobrega", foto: "https://github.com/KylixXD.png" }
+        { name: "Acauan Ribeiro", foto: "https://github.com/acauanrr.png" },
+        { name: "Cleuson", foto: "https://github.com/cleusonss.png" },
+        { name: "Ozeias Sousa", foto: "https://github.com/osouzati.png" },
+        { name: "Victor Roberto", foto: "https://github.com/mandaver.png" },
+        { name: "Rafael Nobrega", foto: "https://github.com/KylixXD.png" }
     ]
 
     return (
@@ -19,10 +19,10 @@ export default function ChatHistory() {
             </Box>
             <Flex w="inherit" h={"fit-content"} direction={"column"} gap={2} overflowY={"auto"} className="customScroll" padding={2}>
                 {friends.map((friend, index) => (
-                    <>
-                        <ChatCard key={index} nome={friend.nome} foto={friend.foto} />
+                    <div key={index}>
+                        <ChatCard name={friend.name} foto={friend.foto} />
                         <hr />
-                    </>
+                    </div>
                 ))}
             </Flex>
         </VStack>

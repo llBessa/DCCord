@@ -7,7 +7,7 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
     try {
         let response = await prisma.users.create({
             data: {
-                nome: name,
+                name: name,
                 email: email,
                 senha: password,
                 github: github ? github : undefined

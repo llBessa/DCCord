@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react"
 import { setCookie, parseCookies } from "nookies"
 import { useRouter } from "next/router";
 import { getAPIClient } from "../lib/fetch";
+import io from "socket.io-client"
+
 
 type AuthContextType = {
     isAuthenticated: boolean;
@@ -93,9 +95,13 @@ export function AuthProvider({ children }: any) {
                 maxAge: 60 * 60 * 3  // 3 horas
             })
 
-            setUser(user)
+            setUser(apiJsonResponse.user)
 
             router.push("/chatpage")
+
+            const socket = io()
+
+            socket.emit("login", {user: apiJsonResponse.user.name})
 
             return apiJsonResponse
         }

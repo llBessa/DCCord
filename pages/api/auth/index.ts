@@ -3,7 +3,7 @@ import prisma from "../../../lib/prisma"
 import jwt from "jsonwebtoken"
 
 type User = {
-    nome: string;
+    name: string;
     email: string;
     github: string;
     id: string;
@@ -19,7 +19,7 @@ export default async function Authenticate(req: NextApiRequest, res: NextApiResp
         var data: any = await prisma.users.findFirst({
             select: {
                 id: true,
-                nome: true,
+                name: true,
                 email: true,
                 senha: true,
                 github: true
@@ -31,7 +31,7 @@ export default async function Authenticate(req: NextApiRequest, res: NextApiResp
         });
 
         var user: User = {
-            nome: data.nome,
+            name: data.name,
             email: data.email,
             github: data.github,
             id: data.id.toString()

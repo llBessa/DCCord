@@ -1,4 +1,4 @@
-import { Button, Flex, FormControl, FormLabel, Image, Input, Link, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Image, Input, Link, Text, useColorMode, useColorModeValue, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import NextLink from "next/link"
@@ -8,12 +8,14 @@ import { parseCookies } from "nookies";
 import Head from "next/head";
 
 export default function Register() {
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, reset } = useForm()
 
     const formBackground = useColorModeValue("gray.300", "gray.700")
     const { toggleColorMode } = useColorMode();
 
     const { signIn } = useContext(AuthContext)
+
+    const toast = useToast()
 
     async function handleRegister(data: any) {
         let response = await fetch("/api/users/register", {
@@ -23,7 +25,22 @@ export default function Register() {
         })
 
         if (response.status == 200) {
+            toast({
+                title: "Usuario criado com sucesso",
+                duration: 3000,
+                status: "success"
+            })
+
             await signIn({ email: data.email, password: data.password })
+        } else {
+            toast({
+                title: "Erro",
+                duration: 3000,
+                status: "error"
+            })
+            
+            // reseta o formulario
+            reset()
         }
 
     }

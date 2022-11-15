@@ -3,11 +3,11 @@ import Friend from "./Friend";
 
 export default function FriendsOnline(){
     const onlineFriends = [
-        {nome: "Acauan Ribeiro", foto: "https://github.com/acauanrr.png"},
-        {nome: "Cleuson", foto: "https://github.com/cleusonss.png"},
-        {nome: "Ozeias Sousa", foto: "https://github.com/osouzati.png"},
-        {nome: "Victor Roberto", foto: "https://github.com/mandaver.png"},
-        {nome: "Rafael Nobrega", foto: "https://github.com/KylixXD.png"}
+        {name: "Acauan Ribeiro", foto: "https://github.com/acauanrr.png"},
+        {name: "Cleuson", foto: "https://github.com/cleusonss.png"},
+        {name: "Ozeias Sousa", foto: "https://github.com/osouzati.png"},
+        {name: "Victor Roberto", foto: "https://github.com/mandaver.png"},
+        {name: "Rafael Nobrega", foto: "https://github.com/KylixXD.png"}
     ]
 
     return(
@@ -18,7 +18,7 @@ export default function FriendsOnline(){
             </HStack>
             <HStack justifyContent={"space-between"} w="full">
                 {onlineFriends.map((friend , index) => (
-                    <Friend key={index} nome={friend.nome} foto={friend.foto} />
+                    <Friend key={index} name={friend.name} foto={friend.foto} />
                 ))}
             </HStack>
         </VStack>

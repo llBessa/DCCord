@@ -26,7 +26,7 @@ export default function Home() {
   const toast = useToast()
 
   // hook de formulario
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   // contexto de login
   const { signIn } = useContext(AuthContext)
@@ -43,6 +43,9 @@ export default function Home() {
         duration: 3000,
         status: "error"
       })
+
+      // reseta o formulario
+      reset()
     }
 
     if(response.status == "success") {

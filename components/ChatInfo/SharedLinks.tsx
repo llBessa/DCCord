@@ -14,10 +14,10 @@ export default function SharedLinks({ links }: SharedLinksProps) {
             </HStack>
             <Flex direction={"column"} w={"full"} overflowY="auto" gap={2} padding={2} className="customScroll">
                 {links.map((link, index) => (
-                    <>
-                        <LinkCard key={index} {...link} />
+                    <div key={index}>
+                        <LinkCard {...link} />
                         <hr />
-                    </>
+                    </div>
                 ))}
             </Flex>
         </VStack>

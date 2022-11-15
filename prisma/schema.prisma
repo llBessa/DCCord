@@ -9,7 +9,7 @@ datasource db {
 
 model Users {
   id         BigInt    @id @default(autoincrement())
-  nome       String
+  name       String
   email      String
   senha      String    @db.VarChar
   created_at DateTime? @default(now()) @db.Timestamptz(6)

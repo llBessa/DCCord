@@ -14,10 +14,10 @@ export default function SharedFiles({ files }: SharedFilesProps) {
             </HStack>
             <Flex direction={"column"} w={"full"} overflowY="auto" gap={2} padding={2} className="customScroll">
                 {files.map((file: any, index: any) => (
-                    <>
-                        <FileCard key={index} fileName={file.name} srcImage={file.image} fileSize={file.size} dateTime={file.dateTime} />
+                    <div key={index}>
+                        <FileCard fileName={file.name} srcImage={file.image} fileSize={file.size} dateTime={file.dateTime} />
                         <hr />
-                    </>
+                    </div>
                 ))}
             </Flex>
         </VStack>

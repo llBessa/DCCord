@@ -13,11 +13,11 @@ export default function ChatPage() {
       <Head>
         <title>DCCord - Chat</title>
       </Head>
-      <HStack h={"100vh"} justifyContent="space-around">
+      <HStack minH={{base: "100vh", md: "auto"}} h={{base: "auto", md: "100vh"}} justifyContent="space-around" alignItems={"center"}>
         <Navigation display={{ base: "none", md: "flex" }} w={"100%"} />
         <HStack h={"100vh"} justifyContent={"space-around"} overflowX="hidden" gap={6} w="100%">
           <LeftSideBar width={"fit-content"} height={"90%"} display={{ base: "none", md: "flex" }} />
-          <Chat width={{ base: "80%", md: "50%", lg: "45%" }} height={"90%"} />
+          <Chat width={{ base: "80%", md: "50%", lg: "45%" }} height={{base: "inherit", md: "90%"}} />
           <ChatInfo width={"20%"} height="90%" display={{ base: "none", xl: "flex" }} />
         </HStack>
       </HStack>

@@ -7,15 +7,17 @@ export default async function Get(req: NextApiRequest, res: NextApiResponse) {
     try{
         const user = await prisma.users.findUnique({
             select: {
-                nome: true,
+                id: true,
+                name: true,
                 email: true,
-                github: true,
-                created_at: true,
+                github: true
             },
             where: {
                 id: id? parseInt(id.toString()): undefined
             }
         })
+
+
         return res.status(200).json({ status: "success", status_msg: "User successfully fetched", user: user })
     } catch(error){
         return res.status(500).json({ status: "error", status_msg: error })
