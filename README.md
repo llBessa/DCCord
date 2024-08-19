@@ -31,12 +31,6 @@
 
 ### **2. Adicionar os arquivos com informações sensiveis**
 
-<br>
-
-> **PROFESSOR** Verificar no Slack
-
-<br>
-
 #### .env
 
     // Caminho: /.env
